@@ -175,10 +175,10 @@ Authorization: Bearer SEU_TOKEN
 
 ```bash
 # clonar repositório
-git clone https://github.com/seu-user/devtweet-api.git
+git clone https://github.com/seu-user/devtweet-api.git](https://github.com/arthurtvrs10/spring-security-jwt-auth-api.git
 
 # entrar na pasta
-cd devtweet-api
+cd spring-security-jwt-auth-api
 
 # executar aplicação
 ./mvnw spring-boot:run
