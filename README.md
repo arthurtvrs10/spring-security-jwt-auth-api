@@ -1,44 +1,8 @@
 # spring-security-jwt-auth-api
 
-# DevTweet API
-
-Uma API REST desenvolvida com Java + Spring Boot focada em autenticação JWT, autorização com Spring Security e gerenciamento de tweets.
-
----
-
-# Sugestões de nome para o projeto
-
-## Nomes mais profissionais
-
-* DevTweet API
-* SecureTweet
-* SpringSocial API
-* AuthTweet
-* TweetShield
-* JWTwitter
-* BuildRun Social API
-* MicroTweet API
-* SecurePosts API
-* SpringAuth API
-
-## Nomes mais modernos
-
-* Twitty
-* DevBird
-* ByteTweet
-* CodeTweet
-* TweetCore
-* DevFlow API
-* NexTweet
-* AuthFlow API
-
----
-
-# README
-
 ## 📌 Sobre o projeto
 
-O DevTweet API é uma aplicação backend construída com Spring Boot com foco em:
+Esse projeto é uma Api com aplicação backend construída com Spring Boot com foco em:
 
 * Autenticação JWT
 * Autorização com Spring Security
@@ -92,7 +56,6 @@ src/main/java
  ├── controller/dto
  ├── entities
  ├── repository
- └── service
 ```
 
 ---
