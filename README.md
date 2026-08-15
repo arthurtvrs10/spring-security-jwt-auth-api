@@ -1,198 +1,70 @@
-# spring-security-jwt-auth-api
+# 🔐 Spring Security JWT Auth API
 
-## 📌 Sobre o projeto
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 21" />
+  <img src="https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot" />
+  <img src="https://img.shields.io/badge/Spring_Security-6.x-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white" alt="Spring Security" />
+  <img src="https://img.shields.io/badge/JWT-OAuth2_Resource_Server-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" />
+  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+  <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License MIT" />
+</p>
 
-Esse projeto é uma Api com aplicação backend construída com Spring Boot com foco em:
-
-* Autenticação JWT
-* Autorização com Spring Security
-* Controle de Roles (ADMIN e BASIC)
-* CRUD de tweets
-* API REST
-* Persistência com JPA/Hibernate
-* Banco de dados MySQL
-
-O projeto foi criado com objetivo de aprendizado prático sobre segurança em APIs modernas usando Java.
+API RESTful de nível de produção construída com **Java 21** e **Spring Boot 3**, implementando **autenticação stateless com JSON Web Tokens (JWT)**, criptografia assimétrica com par de chaves RSA (Public/Private Key) e controle de acesso baseado em funções (**RBAC - Role-Based Access Control**).
 
 ---
 
-## 🚀 Tecnologias utilizadas
+## 🎯 Funcionalidades e Arquitetura
 
-* Java 21
-* Spring Boot
-* Spring Security
-* Spring Data JPA
-* JWT (JSON Web Token)
-* Hibernate
-* MySQL
-* Maven
+- 🔑 **Autenticação Stateless JWT**: Geração de tokens de acesso seguros assinados com par de chaves RSA.
+- 🛡️ **Role-Based Access Control (RBAC)**: Diferenciação de perfis `ADMIN` e `BASIC`.
+- 🐦 **CRUD de Recursos (Tweets/Posts)**: Regras de negócio seguras onde usuários comuns gerenciam suas próprias publicações e administradores possuem privilégios de moderação.
+- 🐳 **Ambiente Dockerizado**: Banco de dados MySQL pré-configurado via Docker Compose.
+- 🗄️ **Persistência & Migrations**: Spring Data JPA com Hibernate e inicialização automatizada de usuários com `CommandLineRunner`.
 
 ---
 
-## 🔐 Funcionalidades
+## 📋 Endpoints Principais
 
-### Usuários
-
-* Cadastro de usuários
-* Login autenticado com JWT
-* Criptografia de senha com BCrypt
-* Controle de permissões com roles
-
-### Tweets
-
-* Criar tweets
-* Listar tweets
-* Deletar tweets
-* Proteção de rotas autenticadas
+| Método | Endpoint | Acesso | Descrição |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/login` | Público | Autentica usuário e retorna JWT Bearer Token |
+| `POST` | `/users` | Público | Cadastro de novos usuários |
+| `GET` | `/feed` | Autenticado | Feed paginado de publicações |
+| `POST` | `/tweets` | Autenticado | Criar nova publicação vinculada ao token |
+| `DELETE` | `/tweets/{id}` | Autenticado / RBAC | Exclui tweet (Autor ou ADMIN) |
 
 ---
 
-## 📂 Estrutura do projeto
+## 🚀 Como Executar
 
-```txt
-src/main/java
- ├── config
- ├── controller
- ├── controller/dto
- ├── entities
- ├── repository
-```
+### Pré-requisitos
+- **Java JDK 21+**
+- **Maven** (ou wrapper incluso `./mvnw`)
+- **Docker & Docker Compose**
 
----
-
-## ⚙️ Configuração do banco
-
-### application.properties
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/mydb
-spring.datasource.username=root
-spring.datasource.password=senha
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
-
----
-
-## 🔑 Autenticação JWT
-
-### Login
-
-```http
-POST /login
-```
-
-### Body
-
-```json
-{
-  "username": "admin",
-  "password": "123"
-}
-```
-
-### Resposta
-
-```json
-{
-  "accessToken": "jwt-token",
-  "expiresIn": 300
-}
-```
-
----
-
-## 🛡️ Rotas protegidas
-
-Para acessar rotas protegidas:
-
-```http
-Authorization: Bearer SEU_TOKEN
-```
-
----
-
-## 👤 Roles
-
-### ADMIN
-
-* Pode acessar endpoints administrativos
-* Pode listar usuários
-
-### BASIC
-
-* Pode criar tweets
-* Pode acessar endpoints comuns
-
----
-
-## 📮 Endpoints
-
-### Usuários
-
-| Método | Endpoint | Descrição       |
-| ------ | -------- | --------------- |
-| POST   | /users   | Criar usuário   |
-| GET    | /users   | Listar usuários |
-
----
-
-### Autenticação
-
-| Método | Endpoint | Descrição |
-| ------ | -------- | --------- |
-| POST   | /login   | Gerar JWT |
-
----
-
-### Tweets
-
-| Método | Endpoint     | Descrição     |
-| ------ | ------------ | ------------- |
-| POST   | /tweets      | Criar tweet   |
-| DELETE | /tweets/{id} | Deletar tweet |
-
----
-
-## 🧠 Conceitos praticados
-
-* JWT Authentication
-* Authorization Server
-* OAuth2 Resource Server
-* BCrypt Password Encoder
-* Roles e Authorities
-* Stateless Authentication
-* REST APIs
-* Relacionamentos JPA
-* ManyToMany
-* DTO Pattern
-* Segurança em APIs
-
----
-
-## ▶️ Como executar
-
+### 1. Iniciar Banco de Dados (MySQL via Docker)
 ```bash
-# clonar repositório
-git clone https://github.com/seu-user/devtweet-api.git](https://github.com/arthurtvrs10/spring-security-jwt-auth-api.git
-
-# entrar na pasta
-cd spring-security-jwt-auth-api
-
-# executar aplicação
-./mvnw spring-boot:run
+docker-compose -f docker/docker-compose.yml up -d
 ```
+
+### 2. Executar a Aplicação Spring Boot
+```bash
+# Linux/macOS:
+./mvnw spring-boot:run
+
+# Windows:
+./mvnw.cmd spring-boot:run
+```
+
+A API estará disponível em `http://localhost:8080`.
 
 ---
 
-## 📖 Objetivo
+## 📄 Licença
 
-Este projeto foi desenvolvido com foco em estudo e aprofundamento em:
+Este projeto está licenciado sob a licença [MIT](LICENSE).
 
-* Spring Security
-* JWT
-* APIs REST modernas
-* Arquitetura backend
-* Segurança de aplicações Java
+---
 
+<p align="center">Desenvolvido por <a href="https://github.com/arthurtvrs10">Arthur Tavares</a></p>
